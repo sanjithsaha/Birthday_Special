@@ -726,3 +726,113 @@ transform:scale(1.08);
     opacity: 0;
   }
 }
+/* ============ INTERACTIVE FLOWER EXPERIENCE ============ */
+.flower-love-note {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15rem;
+  color: #ffd700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  min-height: 48px;
+  text-align: center;
+  margin: 15px auto 25px auto;
+  max-width: 500px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.flower-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flower-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 25px 20px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+}
+
+.flower-card:hover, .flower-card:active {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
+}
+
+.flower-card.active-bloom {
+  border-color: #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  animation: pulseCard 1.5s infinite alternate;
+}
+
+.flower-icon {
+  font-size: 3.8rem;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.flower-card:hover .flower-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.flower-card h3 {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.flower-card p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+@keyframes pulseCard {
+  0% { transform: scale(1.03); }
+  100% { transform: scale(1.08); }
+}
+
+/* Swirling Full-Screen Petals */
+.floating-petal {
+  position: fixed;
+  top: -50px;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  animation: swirlAndFall linear forwards;
+}
+
+@keyframes swirlAndFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.6);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(60px) rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: translateY(105vh) translateX(-60px) rotate(360deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Background Color Shift Overlays */
+body.bloom-rose {
+  background-color: #2b0812 !important;
+  transition: background-color 1.2s ease;
+}
+
+body.bloom-kathgolap {
+  background-color: #241c10 !important;
+  transition: background-color 1.2s ease;
+}
+
+body.bloom-dolanchapa {
+  background-color: #0b1f1d !important;
+  transition: background-color 1.2s ease;
+}
