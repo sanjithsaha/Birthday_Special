@@ -621,3 +621,86 @@ function startFlowerSelection(){
   }
 
 })();
+
+/* ============ STAR CATCHING GAME LOGIC ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  const okBtn = document.getElementById('starOkBtn');
+  const msgBox = document.getElementById('starMsgBox');
+  const starCounter = document.getElementById('starCounter');
+  const starStage = document.getElementById('starStage');
+  const magicBanner = document.getElementById('magicCompleteBanner');
+  const photoStage = document.getElementById('memoryPhotoStage');
+
+  if (!okBtn || !starStage) return;
+
+  let starsCaught = 0;
+  const totalStars = 5;
+
+  okBtn.addEventListener('click', () => {
+    msgBox.style.display = 'none';
+    starCounter.style.display = 'block';
+    starStage.style.display = 'block';
+    spawnStarsSequentially();
+  });
+
+  function spawnStarsSequentially() {
+    starStage.innerHTML = '';
+    starsCaught = 0;
+    updateCounter();
+
+    const stageWidth = starStage.clientWidth - 60;
+    const stageHeight = starStage.clientHeight - 60;
+
+    for (let i = 0; i < totalStars; i++) {
+      setTimeout(() => {
+        const star = document.createElement('div');
+        star.classList.add('interactive-star');
+        star.innerText = '⭐';
+
+        const randomX = Math.max(15, Math.floor(Math.random() * stageWidth));
+        const randomY = Math.max(15, Math.floor(Math.random() * stageHeight));
+
+        star.style.left = `${randomX}px`;
+        star.style.top = `${randomY}px`;
+
+        star.addEventListener('click', function () {
+          if (this.classList.contains('pop-out')) return;
+
+          this.innerText = '✨'; // Sparkle effect on click
+          this.classList.add('pop-out');
+          starsCaught++;
+          updateCounter();
+
+          setTimeout(() => {
+            this.remove();
+          }, 350);
+
+          if (starsCaught === totalStars) {
+            onGameComplete();
+          }
+        });
+
+        starStage.appendChild(star);
+      }, i * 400); // Pops up stars one by one with a 400ms delay
+    }
+  }
+
+  function updateCounter() {
+    starCounter.innerText = `⭐ ${starsCaught}/${totalStars}`;
+  }
+
+  function onGameComplete() {
+    setTimeout(() => {
+      starStage.style.display = 'none';
+      starCounter.style.display = 'none';
+      magicBanner.style.display = 'block';
+
+      setTimeout(() => {
+        photoStage.style.display = 'block';
+        setTimeout(() => {
+          photoStage.classList.add('visible');
+        }, 50);
+      }, 800);
+    }, 400);
+  }
+});
