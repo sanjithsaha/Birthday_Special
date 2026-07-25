@@ -243,26 +243,56 @@ else
   /* ============================================================
      7. MEMORY POLAROID — parallax + lightbox
      ============================================================ */
-  const polaroid = document.getElementById('polaroid');
-  const polaroidStage = document.querySelector('.polaroid-stage');
-  polaroidStage.addEventListener('pointermove', (e) => {
-    if(reduceMotion) return;
-    const rect = polaroidStage.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    gsap.to(polaroid, { rotateY: px*14, rotateX: -py*14, duration:0.6, ease:'power2.out', overwrite:'auto' });
-  });
-  polaroidStage.addEventListener('pointerleave', () => {
-    gsap.to(polaroid, { rotateY:0, rotateX:0, duration:0.8, ease:'power3.out' });
-  });
+const polaroid = document.getElementById('polaroid');
+const polaroidStage = document.querySelector('.polaroid-stage');
+
+if (polaroid && polaroidStage) {
+
+    polaroidStage.addEventListener('pointermove', (e) => {
+        if (reduceMotion) return;
+
+        const rect = polaroidStage.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(polaroid,{
+            rotateY:px*14,
+            rotateX:-py*14,
+            duration:0.6,
+            ease:'power2.out',
+            overwrite:'auto'
+        });
+    });
+
+    polaroidStage.addEventListener('pointerleave', () => {
+        gsap.to(polaroid,{
+            rotateY:0,
+            rotateX:0,
+            duration:0.8,
+            ease:'power3.out'
+        });
+    });
+
+}
 
   const lightbox = document.getElementById('lightbox');
   function openLightbox(){ lightbox.classList.add('show'); lightbox.setAttribute('aria-hidden','false'); }
   function closeLightbox(){ lightbox.classList.remove('show'); lightbox.setAttribute('aria-hidden','true'); }
-  polaroid.addEventListener('click', openLightbox);
-  polaroid.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ openLightbox(); } });
-  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-  document.getElementById('lightboxX').addEventListener('click', closeLightbox);
+  if (polaroid) {
+    polaroid.addEventListener('click', openLightbox);
+    polaroid.addEventListener('keydown', (e)=>{
+        if(e.key==="Enter") openLightbox();
+    });
+}
+ const lightboxClose = document.getElementById('lightboxClose');
+
+if(lightboxClose){
+    lightboxClose.addEventListener('click', closeLightbox);
+}
+
+if(lightbox){
+    lightbox.addEventListener('click', closeLightbox);
+}
   window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
   /* ============================================================
@@ -312,44 +342,41 @@ else
     const bloom = svg.querySelector('.bloom-group');
     gsap.set(bloom, { transformOrigin:'50% 100%', scale:0.15, opacity:0 });
   });
-  function startShootingStarGame(){}
+ function startShootingStarGame(){}
 
 function moveStar(){}
 
- function unlockPhoto(){}
-   function startFlowerSelection(){
-     document.querySelectorAll(".flowerBtn").forEach(btn=>{
+function unlockPhoto(){}
 
-btn.onclick=()=>{
+function startFlowerSelection(){
 
-const flower=btn.dataset.flower;
+    document.querySelectorAll(".flowerBtn").forEach(btn=>{
 
-switch(flower){
+        btn.onclick = ()=>{
 
-case "rose":
-// hearts + petals
-break;
+            const flower = btn.dataset.flower;
 
-case "sakura":
-// falling blossoms
-break;
+            switch(flower){
 
-case "tulip":
-// butterflies
-break;
+                case "rose":
+                    break;
 
-case "sunflower":
-// golden sparkles
-break;
+                case "sakura":
+                    break;
+
+                case "tulip":
+                    break;
+
+                case "sunflower":
+                    break;
+
+            }
+
+        };
+
+    });
 
 }
-
-};
-
-});
-
-      
-   }
   function bloomFlowers(){
     document.querySelectorAll('.bloom-group').forEach((bloom, i) => {
       gsap.to(bloom, { scale:1, opacity:1, duration:1.2, delay: i*0.15 + 0.2, ease:'back.out(1.6)' });
