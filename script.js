@@ -127,9 +127,15 @@
     buildDots();
     goToSlide(0, false);
 
-    document.getElementById('navNext').addEventListener('click', () => advance());
+    document.getElementById('navNext').addEventListener('click',(e)=>{
+    magicSparkles(e.clientX,e.clientY);
+    advance();
+});
     document.getElementById('navBack').addEventListener('click', () => retreat());
-    document.getElementById('beginBtn').addEventListener('click', () => advance());
+    document.getElementById('beginBtn').addEventListener('click',(e)=>{
+    magicSparkles(e.clientX,e.clientY);
+    advance();
+});
     document.getElementById('replayBtn').addEventListener('click', () => { goToSlide(0, true); });
 
     window.addEventListener('keydown', (e) => {
@@ -209,9 +215,10 @@
     gsap.to(f, { opacity: 0, duration: 0.6, delay: 0.9, ease: 'power1.in' });
   }
 
-  /* ============================================================
-     6. GIFT BOX
-     ============================================================ */
+  magicSparkles(
+    window.innerWidth / 2,
+    window.innerHeight / 2
+);
   const giftBox = document.getElementById('giftBox');
   const giftHint = document.getElementById('giftHint');
   let giftOpened = false;
