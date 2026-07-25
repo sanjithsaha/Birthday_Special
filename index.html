@@ -89,17 +89,31 @@
       <p class="eyebrow s-in">where it began</p>
       <h2 class="section-title s-in">The First Time I Saw You</h2>
 
-     <div id="shootingGame">
-    <h3>Catch the Magic Star ✨</h3>
+      <div class="star-game-container">
+        <!-- Step 1: Prompt Message -->
+        <div id="starMsgBox" class="star-game-message">
+          <p>Catch all 5 magical stars to unlock the memory.</p>
+          <button class="btn-glass" id="starOkBtn" style="margin-top: 15px;"><span>OK</span></button>
+        </div>
 
-    <div id="gameArea">
-        <div id="magicStar">⭐</div>
-    </div>
-  </div>
+        <!-- Step 2: Counter & Game Area -->
+        <div id="starCounter" class="star-counter" style="display: none;">⭐ 0/5</div>
+        <div id="starStage" class="star-field-stage" style="display: none;"></div>
 
-  <div id="photoContainer" class="hidden">
-    <!-- Move your current polaroid-stage here -->
-  </div>
+        <!-- Step 3: Complete Banner -->
+        <div id="magicCompleteBanner" class="star-game-message" style="display: none; font-size: 1.5rem; color: #ffd700;">
+          ✨ Magic Complete!
+        </div>
+
+        <!-- Step 4: Polaroid Container (Shows Image) -->
+        <div id="memoryPhotoStage" class="polaroid-stage photo-reveal" style="display: none;">
+          <div class="polaroid">
+            <div class="polaroid-img-wrap">
+              <img src="first-memory.jpg" alt="First Memory">
+            </div>
+            <p class="polaroid-caption">A moment frozen in time ✨</p>
+          </div>
+        </div>
       </div>
     </section>
 
