@@ -711,3 +711,50 @@ function startFlowerSelection(){
     setupGame();
   }
 })();
+/* ============ FLOWER EXPLOSION EFFECT ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  const flowerCards = document.querySelectorAll('.flower-card');
+
+  // Emojis mapping for petals burst
+  const flowerPetals = {
+    rose: ['🌹', '🥀', '❤️', '✨'],
+    kathgolap: ['🌸', '🌼', '✨', '💛'],
+    dolanchapa: ['💮', '🤍', '✨', '🌿']
+  };
+
+  flowerCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const flowerType = card.getAttribute('data-flower');
+      const symbols = flowerPetals[flowerType] || ['🌸', '✨'];
+
+      // Trigger burst of 35 floating elements
+      for (let i = 0; i < 35; i++) {
+        createFloatingPetal(symbols);
+      }
+    });
+  });
+
+  function createFloatingPetal(symbols) {
+    const petal = document.createElement('div');
+    petal.classList.add('floating-petal');
+
+    // Pick a random symbol from the array
+    petal.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+
+    // Randomize positioning and size
+    const startX = Math.random() * window.innerWidth;
+    const duration = 2.5 + Math.random() * 2.5; // Fall speed between 2.5s - 5s
+    const fontSize = 1.2 + Math.random() * 1.5; // Size variation
+
+    petal.style.left = `${startX}px`;
+    petal.style.fontSize = `${fontSize}rem`;
+    petal.style.animationDuration = `${duration}s`;
+
+    document.body.appendChild(petal);
+
+    // Remove element after animation finishes
+    setTimeout(() => {
+      petal.remove();
+    }, duration * 1000);
+  }
+});
