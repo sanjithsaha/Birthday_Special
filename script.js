@@ -691,16 +691,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function onGameComplete() {
     setTimeout(() => {
+      // Hide game board and counter
       starStage.style.display = 'none';
       starCounter.style.display = 'none';
+      
+      // Show magic complete banner
       magicBanner.style.display = 'block';
 
+      // Unhide photo container and force animation
       setTimeout(() => {
         photoStage.style.display = 'block';
-        setTimeout(() => {
-          photoStage.classList.add('visible');
-        }, 50);
-      }, 800);
-    }, 400);
+        
+        // Force browser layout repaint before adding visible class
+        void photoStage.offsetWidth; 
+        
+        photoStage.classList.add('visible');
+      }, 600);
+
+    }, 300);
   }
-});
