@@ -654,3 +654,75 @@ transform:scale(1.08);
   font-size: 0.95rem;
   font-weight: 500;
 }
+/* ============ FLOWER SECTION STYLES ============ */
+.flower-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.flower-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 25px 20px;
+  width: 220px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.flower-card:hover, .flower-card:active {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 215, 0, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.flower-icon {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  animation: floatFlower 3s ease-in-out infinite alternate;
+}
+
+.flower-card h3 {
+  font-family: 'Poppins', sans-serif;
+  color: #ffd700;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.flower-card p {
+  color: #e0e0e0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+@keyframes floatFlower {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+/* Full-Screen Floating Petals */
+.floating-petal {
+  position: fixed;
+  top: -40px;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  animation: fallAndRotate linear forwards;
+}
+
+@keyframes fallAndRotate {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
