@@ -758,3 +758,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }, duration * 1000);
   }
 });
+/* ============ FLOWER INTERACTIVE BLOOM LOGIC ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  const flowerCards = document.querySelectorAll('.flower-card');
+  const loveNote = document.getElementById('flowerLoveNote');
+
+  // Emoji sets for petal burst
+  const flowerPetals = {
+    rose: ['🌹', '🥀', '❤️', '✨', '💖'],
+    kathgolap: ['🌸', '🌼', '✨', '💛', '🤍'],
+    dolanchapa: ['💮', '🤍', '✨', '🌿', '💎']
+  };
+
+  flowerCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const flowerType = card.getAttribute('data-flower');
+      const noteText = card.getAttribute('data-note');
+      const symbols = flowerPetals[flowerType] || ['🌸', '✨'];
+
+      // 1. Highlight active card
+      flowerCards.forEach(c => c.classList.remove('active-bloom'));
+      card.classList.add('active-bloom');
+
+      // 2. Change background mood
+      document.body.classList.remove('bloom-rose', 'bloom-kathgolap', 'bloom-dolanchapa');
+      document.body.classList.add(`bloom-${flowerType}`);
+
+      // 3. Smooth love note update
+      if (loveNote) {
+        loveNote.style.opacity = '0';
+        loveNote.style.transform = 'translateY(-10px)';
+
+        setTimeout(() => {
+          loveNote.innerText = noteText;
+          loveNote.style.opacity = '1';
+          loveNote.style.transform = 'translateY(0)';
+        }, 300);
+      }
+
+      // 4. Trigger 40 swirling floating petals
+      for (let i = 0; i < 40; i++) {
+        setTimeout(() => {
+          createSwirlingPetal(symbols);
+        }, i * 60); // Staggered drop delay
+      }
+    });
+  });
+
+  function createSwirlingPetal(symbols) {
+    const petal = document.createElement('div');
+    petal.classList.add('floating-petal');
+
+    petal.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+
+    const startX = Math.random() * window.innerWidth;
+    const duration = 3 + Math.random() * 3; // 3s to 6s fall duration
+    const fontSize = 1.3 + Math.random() * 1.5;
+
+    petal.style.left = `${startX}px`;
+    petal.style.fontSize = `${fontSize}rem`;
+    petal.style.animationDuration = `${duration}s`;
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+      petal.remove();
+    }, duration * 1000);
+  }
+});
