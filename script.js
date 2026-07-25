@@ -186,10 +186,17 @@
   }
 
   function onSlideEnter(id){
-    if(id === 'slide-flowers') startPetals();
-    else stopPetals();
+    if(id === 'slide-memory')
+    startShootingStarGame();
 
-    if(id === 'slide-ending') animateName();
+ if(id === 'slide-flowers')
+    startFlowerSelection();
+
+else
+    stopPetals();
+
+ if(id === 'slide-ending')
+    animateName();
   }
 
   /* ============================================================
@@ -305,7 +312,44 @@
     const bloom = svg.querySelector('.bloom-group');
     gsap.set(bloom, { transformOrigin:'50% 100%', scale:0.15, opacity:0 });
   });
+  function startShootingStarGame(){}
 
+function moveStar(){}
+
+ function unlockPhoto(){}
+   function startFlowerSelection(){
+     document.querySelectorAll(".flowerBtn").forEach(btn=>{
+
+btn.onclick=()=>{
+
+const flower=btn.dataset.flower;
+
+switch(flower){
+
+case "rose":
+// hearts + petals
+break;
+
+case "sakura":
+// falling blossoms
+break;
+
+case "tulip":
+// butterflies
+break;
+
+case "sunflower":
+// golden sparkles
+break;
+
+}
+
+};
+
+});
+
+      
+   }
   function bloomFlowers(){
     document.querySelectorAll('.bloom-group').forEach((bloom, i) => {
       gsap.to(bloom, { scale:1, opacity:1, duration:1.2, delay: i*0.15 + 0.2, ease:'back.out(1.6)' });
